@@ -1,0 +1,12 @@
+{
+  "name": "Mobile-Flashcards-NativeApp",
+  "displayName": "Mobile-Flashcards-NativeApp",
+  "expo": {
+    "name": "Mobile-Flashcards-NativeApp",
+    "slug": "Mobile-Flashcards-NativeApp",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
