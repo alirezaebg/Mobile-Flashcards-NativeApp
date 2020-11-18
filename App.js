@@ -1,22 +1,69 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Decks from './components/Decks'
+// import 'react-native-gesture-handler'
+import React from 'react'
+import { View, Platform, StatusBar } from 'react-native'
+import Deck from './components/Decks'
+import { purple } from './utils/colors'
+import NewDeck from './components/NewDeck'
+import Constants from 'expo-constants'
+
+// import { NavigationContainer } from "@react-navigation/native"
+// import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Decks />
-      <StatusBar style="auto" />
-    </View>
-  );
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  function UdaciStatusBar({ backgroundColor, ...props }) {
+    return (
+      <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
+        <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+      </View>
+    )
+  }
+
+  // const RouteConfigs = {
+  //   Decks: {
+  //     name: "Decks",
+  //     component: Decks,
+  //   },
+  //   NewDeck: {
+  //     name: "NewDeck",
+  //     component: NewDeck,
+  //   }
+  // }
+
+  // const TabNavigatorConfig = {
+  //   navigationOptions: {
+  //     header: null
+  //   },
+  //   tabBarOptions: {
+  //     activeTintColor: Platform.OS === "ios" ? purple : white,
+  //     style: {
+  //       height: 56,
+  //       backgroundColor: Platform.OS === "ios" ? white : purple,
+  //       shadowColor: "rgba(0, 0, 0, 0.24)",
+  //       shadowOffset: {
+  //         width: 0,
+  //         height: 3
+  //       },
+  //       shadowRadius: 6,
+  //       shadowOpacity: 1
+  //     }
+  //   }
+  // }
+
+  // const Tab = createBottomTabNavigator()
+
+  // const TabNav = () => (
+  //   <Tab.Navigator {...TabNavigatorConfig}>
+  //     <Tab.Screen {...RouteConfigs['Decks']} />
+  //     <Tab.Screen {...RouteConfigs['NewDeck']} />
+  //   </Tab.Navigator>
+  // )
+
+
+  return (
+    <View style={{ flex: 1 }}>
+      <UdaciStatusBar backgroundColor={purple} barStyle='light-content' />
+      <Deck />
+    </View>
+  )
+}
