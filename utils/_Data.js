@@ -1,4 +1,7 @@
-const decks = {
+import AsyncStorage from '@react-native-async-storage/async-storage'
+export const DECKS_STORAGE_KEY = 'flashcards:decks'
+
+const initialDecks = {
     React: {
         title: 'React',
         questions: [
@@ -21,4 +24,15 @@ const decks = {
             }
         ]
     }
+}
+
+function setInitialDecks() {
+    AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(decks))
+    return initialDecks
+}
+
+export function setDecksInfo(result) {
+    return result === null 
+    ? setInitialDecks()
+    : JSON.parse(result)      
 }
