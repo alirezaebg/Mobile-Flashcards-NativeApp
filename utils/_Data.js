@@ -27,7 +27,7 @@ const initialDecks = {
 }
 
 function setInitialDecks() {
-    AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(decks))
+    AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(initialDecks))
     return initialDecks
 }
 
