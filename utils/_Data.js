@@ -12,6 +12,10 @@ const initialDecks = {
             {
                 question: 'Where do you make Ajax requests in React?',
                 answer: 'The componentDidMount lifecycle event'
+            },
+            {
+                question: 'Should a reducer be a pure function',
+                answer: 'Yes'
             }
         ]
     },

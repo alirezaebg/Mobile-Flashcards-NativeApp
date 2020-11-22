@@ -1,35 +1,40 @@
 import React, { Component } from 'react'
-import { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import { ceil } from 'react-native-reanimated'
+import { receiveEntries } from '../actions'
+import { connect } from 'react-redux'
 import { getDecks } from '../utils/api'
 import { yellow } from '../utils/colors'
+import { AppLoading } from 'expo'
 
 class Decks extends Component {
     state = {
-        data: {}
+        ready: false
     }
     componentDidMount() {
+        const { dispatch } = this.props
         getDecks()
-            .then(data => {
-                this.setState(() => ({ data }))
-            })
+            .then((entries) => dispatch(receiveEntries(entries)))
+            .then(() => this.setState(() => ({ ready: true })))
     }
 
     render() {
-        const { data } = this.state
+        const { entries } = this.props
+        const { ready } = this.state
+        if (ready === false) {
+            return <AppLoading />
+        }
         return (
             <View>
-                {Object.keys(data).map(elem => (
+                {Object.keys(entries).map(elem => (
                     <TouchableOpacity
                         key={elem}
                         style={styles.deckBtn}>
-                        <Text style={styles.deckTitleText}>
-                            {data[elem].title}
+                        <Text style={[styles.deckText, { fontSize: 20 }]}>
+                            {entries[elem].title}
                         </Text>
-                        <Text style={styles.deckTitleText}>
-                            {data[elem].questions.length}
-                            {data[elem].questions.length <= 1 ? ' card' : ' cards'}
+                        <Text style={[styles.deckText, { fontSize: 16 }]}>
+                            {entries[elem].questions.length}
+                            {entries[elem].questions.length <= 1 ? ' card' : ' cards'}
                         </Text>
                     </TouchableOpacity>
                 ))
@@ -49,11 +54,16 @@ const styles = StyleSheet.create({
         marginVertical: 20,
         marginHorizontal: 40,
     },
-    deckTitleText: {
+    deckText: {
         textAlign: 'center',
-        padding: 5,
-        fontSize: 18,
+        padding: 5
     }
 })
 
-export default Decks
+function mapStateToProps(entries) {
+    return {
+        entries
+    }
+}
+
+export default connect(mapStateToProps)(Decks)
