@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import reducer from './reducers'
 import Decks from './components/Decks'
 import Deck from './components/Deck'
+import NewCard from './components/NewCard'
 import NewDeck from './components/NewDeck'
 import Constants from 'expo-constants'
 import { purple, white, lightPurp, orange } from './utils/colors'
@@ -96,6 +97,10 @@ const StackConfig = {
       },
       title: "Deck Information",
     }
+  },
+  NewCard: {
+    name: "New Card",
+    component: NewCard,
   }
 }
 const Stack = createStackNavigator();
@@ -103,6 +108,7 @@ const MainNav = () => (
   <Stack.Navigator {...StackNavigatorConfig}>
     <Stack.Screen {...StackConfig['TabNav']} />
     <Stack.Screen {...StackConfig['Deck']} />
+    <Stack.Screen {...StackConfig['NewCard']} />
   </Stack.Navigator>
 )
 

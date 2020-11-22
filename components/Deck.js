@@ -18,6 +18,7 @@ function createDeckView({name, entry, navigation}) {
             </Text>
             <TouchableOpacity
                 style={[styles.addCardBtn, styles.btn]}
+                onPress={() => navigation.navigate('New Card', { title: { name } })}
             >
                 <Text style={{ fontSize: 20 }}>Add Card</Text>
             </TouchableOpacity>
