@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TextInput, TouchableWithoutFeedback, TouchableOpacity, Keyboard } from 'react-native'
 import { connect } from 'react-redux'
-import { saveDeckTitle } from '../utils/api'
+import { getDeck, saveDeckTitle } from '../utils/api'
 import { addDeck } from '../actions'
 import { lightGreen } from '../utils/colors'
 import { CommonActions } from '@react-navigation/native';
@@ -19,15 +19,24 @@ class NewDeck extends Component {
     }
     handlePress = () => {
         const { value } = this.state
-        console.log(value.length)
         if (value.length >= 3) {
-            this.props.dispatch(addDeck(value))
-            //switch the view
-            this.toMainView()
-            // save to db
-            saveDeckTitle(value)
-                .then(() => this.setState(() => ({ value: '' })))
-                .catch(err => console.log(err))
+            getDeck(value)  //Check if the title already exists!
+                .then((result) => {
+                    if (typeof result !== 'undefined') {
+                        this.setState(() => ({
+                            accept: false
+                        }))
+                    }
+                    else {
+                        this.props.dispatch(addDeck(value))
+                        //switch the view
+                        this.toMainView()
+                        // save to db
+                        saveDeckTitle(value)
+                            .then(() => this.setState(() => ({ value: '' })))
+                            .catch(err => console.log(err))
+                    }
+                })
         }
         else {
             this.setState(() => ({
@@ -48,12 +57,13 @@ class NewDeck extends Component {
                 <View style={styles.container}>
                     <Text style={styles.text}>What is the title of your new deck?</Text>
                     <TextInput
-                    placeholder='-Enter title-'
+                        placeholder='-Enter title-'
                         style={styles.textInput}
                         value={value}
                         onChangeText={this.handleChange}
                     />
                     {(value.length < 3 && !accept) && <Text>Title should have 3 letters at least!</Text>}
+                    {(value.length > 3 && !accept) && <Text>This title already exist!</Text>}
                     <View style={styles.submitView}>
                         <TouchableOpacity
                             style={styles.submitBtn}

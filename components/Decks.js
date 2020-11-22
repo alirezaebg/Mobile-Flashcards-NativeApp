@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import { receiveEntries } from '../actions'
 import { connect } from 'react-redux'
 import { getDecks } from '../utils/api'
@@ -26,10 +26,14 @@ class Decks extends Component {
             return <AppLoading />
         }
         return (
-            <View>
+            <ScrollView>
                 {Object.keys(entries).map(elem => (
                     <TouchableOpacity
                         key={elem}
+                        onPress={() => this.props.navigation.navigate(
+                            'Deck',
+                            { name: elem }
+                        )}
                         style={styles.deckBtn}>
                         <Text style={[styles.deckText, { fontSize: 20 }]}>
                             {entries[elem].title}
@@ -41,7 +45,7 @@ class Decks extends Component {
                     </TouchableOpacity>
                 ))
                 }
-            </View>
+            </ScrollView>
         )
     }
 }

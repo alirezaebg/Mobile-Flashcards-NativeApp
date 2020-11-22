@@ -4,6 +4,7 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
 import Decks from './components/Decks'
+import Deck from './components/Deck'
 import NewDeck from './components/NewDeck'
 import Constants from 'expo-constants'
 import { purple, white, lightPurp } from './utils/colors'
@@ -11,6 +12,7 @@ import { purple, white, lightPurp } from './utils/colors'
 import { NavigationContainer } from "@react-navigation/native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { createStackNavigator } from '@react-navigation/stack'
 
 
 
@@ -70,6 +72,36 @@ const TabNav = () => (
   </Tab.Navigator>
 )
 
+// Config for StackNav
+const StackNavigatorConfig = {
+  headerMode: "screen"
+}
+const StackConfig = {
+  TabNav: {
+    name: "Home",
+    component: TabNav,
+    options: { headerShown: false }
+  },
+  Deck: {
+    name: "Deck",
+    component: Deck,
+    options: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple
+      },
+      title: "Deck Information"
+    }
+  }
+}
+const Stack = createStackNavigator();
+const MainNav = () => (
+  <Stack.Navigator {...StackNavigatorConfig}>
+    <Stack.Screen {...StackConfig['TabNav']} />
+    <Stack.Screen {...StackConfig['Deck']} />
+  </Stack.Navigator>
+)
+
 export default class App extends Component {
   render() {
     const store = createStore(reducer)
@@ -78,7 +110,7 @@ export default class App extends Component {
         <View style={{ flex: 1 }}>
           <UdaciStatusBar backgroundColor={purple} barStyle='light-content' />
           <NavigationContainer >
-            <TabNav />
+            <MainNav />
           </NavigationContainer>
         </View >
       </Provider>
