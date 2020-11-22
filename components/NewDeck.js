@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableWithoutFeedback, TouchableOpacity, Keyboard } from 'react-native'
 import { connect } from 'react-redux'
 import { saveDeckTitle } from '../utils/api'
 import { addDeck } from '../actions'
@@ -44,25 +44,28 @@ class NewDeck extends Component {
     render() {
         const { value, accept } = this.state
         return (
-            <View style={styles.container}>
-                <Text style={styles.text}>What is the title of your new deck?</Text>
-                <TextInput
-                    style={styles.textInput}
-                    value={value}
-                    onChangeText={this.handleChange}
-                />
-                {(value.length < 3 && !accept) && <Text>Title should have 3 letters at least!</Text>}
-                <View style={styles.submitView}>
-                    <TouchableOpacity
-                        style={styles.submitBtn}
-                        onPress={this.handlePress}
-                    >
-                        <Text style={styles.submitText}>
-                            SUBMIT
-                    </Text>
-                    </TouchableOpacity>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                <View style={styles.container}>
+                    <Text style={styles.text}>What is the title of your new deck?</Text>
+                    <TextInput
+                    placeholder='-Enter title-'
+                        style={styles.textInput}
+                        value={value}
+                        onChangeText={this.handleChange}
+                    />
+                    {(value.length < 3 && !accept) && <Text>Title should have 3 letters at least!</Text>}
+                    <View style={styles.submitView}>
+                        <TouchableOpacity
+                            style={styles.submitBtn}
+                            onPress={this.handlePress}
+                        >
+                            <Text style={styles.submitText}>
+                                SUBMIT
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-            </View>
+            </TouchableWithoutFeedback>
         )
     }
 }
@@ -71,7 +74,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 20,
-        marginTop: 100
+        paddingTop: 100
     },
     text: {
         fontSize: 22,
