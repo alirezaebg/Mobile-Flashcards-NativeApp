@@ -7,7 +7,7 @@ import Decks from './components/Decks'
 import Deck from './components/Deck'
 import NewDeck from './components/NewDeck'
 import Constants from 'expo-constants'
-import { purple, white, lightPurp } from './utils/colors'
+import { purple, white, lightPurp, orange } from './utils/colors'
 
 import { NavigationContainer } from "@react-navigation/native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
@@ -87,10 +87,14 @@ const StackConfig = {
     component: Deck,
     options: {
       headerTintColor: white,
-      headerStyle: {
-        backgroundColor: purple
+      headerTitleStyle: {
+        fontSize: 24
       },
-      title: "Deck Information"
+      headerStyle: {
+        backgroundColor: orange,
+        height: 60,
+      },
+      title: "Deck Information",
     }
   }
 }

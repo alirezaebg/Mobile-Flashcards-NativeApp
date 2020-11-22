@@ -20,7 +20,7 @@ class NewDeck extends Component {
     handlePress = () => {
         const { value } = this.state
         if (value.length >= 3) {
-            getDeck(value)  //Check if the title already exists!
+            getDeck(value.trim())  //Check if the title already exists!
                 .then((result) => {
                     if (typeof result !== 'undefined') {
                         this.setState(() => ({

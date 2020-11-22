@@ -1,16 +1,33 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
+import { connect } from 'react-redux'
+
 
 class Deck extends Component {
+    componentDidMount() {
+        this.props.navigation.setOptions({
+          title: this.props.name,
+        })
+      }
     render() {
-        const { route } = this.props
+        const { name, entries } = this.props
         return (
             <View>
                 <Text>This is the Deck view!</Text>
-                <Text>{route.params.name}</Text>
+                <Text>{name}</Text>
             </View>
         )
     }
 }
 
-export default Deck
+function mapStateToProps(entries, { route, navigation }) {
+    const { name } = route.params
+    return {
+        name,
+        options: navigation.setOptions,
+        entries
+    }
+
+}
+
+export default connect(mapStateToProps)(Deck)
