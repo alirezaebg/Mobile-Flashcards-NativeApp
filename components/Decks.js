@@ -5,12 +5,14 @@ import { connect } from 'react-redux'
 import { getDecks } from '../utils/api'
 import { yellow } from '../utils/colors'
 import { AppLoading } from 'expo'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 class Decks extends Component {
     state = {
         ready: false
     }
     componentDidMount() {
+        // AsyncStorage.clear()
         const { dispatch } = this.props
         getDecks()
             .then((entries) => dispatch(receiveEntries(entries)))
