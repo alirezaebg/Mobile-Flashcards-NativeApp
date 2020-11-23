@@ -53,8 +53,8 @@ export function manageData() {
     //to clear all the data, use the following command
     // AsyncStorage.clear()
     //to view the existing data, use the following lines of code
-    AsyncStorage.getItem(DECKS_STORAGE_KEY).then((result) => {
-        const data = JSON.parse(result)
-        console.log(data)
-    })
+    // AsyncStorage.getItem(DECKS_STORAGE_KEY).then((result) => {
+    //     const data = JSON.parse(result)
+    //     console.log(data)
+    // })
 }
