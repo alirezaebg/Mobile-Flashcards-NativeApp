@@ -9,7 +9,7 @@ class NewCard extends Component {
     state = {
         question: '',
         answer: '',
-        accept: false
+        accept: true
     }
     handleQuestion = (text) => {
         this.setState(() => ({
@@ -27,7 +27,6 @@ class NewCard extends Component {
         const { question, answer } = this.state
         const card = { question, answer }
         const { title } = this.props
-        console.log(title)
         if (question.length >= 3 && answer.length >= 2) {  //qualified as a new card if fulfils these
             //update store
             this.props.dispatch(addCard(title, card))
@@ -35,11 +34,6 @@ class NewCard extends Component {
             this.props.navigation.goBack()
             // save to AsyncStorage
             addCardToDeck(title, card)
-                // .then(() => this.setState(() => ({
-                //     question: '',
-                //     answer: ''
-                // })))
-                // .catch(err => console.log(err))
         }
         else {
             this.setState(() => ({
@@ -55,7 +49,7 @@ class NewCard extends Component {
                 <View style={styles.container}>
                     <Text style={styles.text}>Enter the new card information</Text>
                     <TextInput
-                        placeholder='-Enter question-'
+                        placeholder='-Enter Question-'
                         style={styles.textInput}
                         value={question}
                         onChangeText={this.handleQuestion}
@@ -66,8 +60,8 @@ class NewCard extends Component {
                         value={answer}
                         onChangeText={this.handleAnswer}
                     />
-                    {/* {(value.length < 3 && !accept) && <Text>Title should have 3 letters at least!</Text>}
-                    {(value.length > 3 && !accept) && <Text>This title already exist!</Text>} */}
+                    {(question.length < 3 || answer.length < 2) && !accept && <Text>Not a valid card. Choose more letters!</Text>}
+                    
                     <View style={styles.submitView}>
                         <TouchableOpacity
                             style={styles.submitBtn}
@@ -98,7 +92,8 @@ const styles = StyleSheet.create({
         height: 50,
         borderColor: 'gray',
         borderWidth: 1,
-        fontSize: 16
+        fontSize: 16,
+        marginBottom: 20
     },
     submitView: {
         flex: 1,
@@ -121,7 +116,6 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state, { route }) {
     const { title } = route.params
-    console.log(title)
     return {
         title,
         entry: state[title]

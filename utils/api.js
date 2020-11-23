@@ -28,7 +28,7 @@ export function addCardToDeck(title, card) {
         .then((deck) => {
             AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({
                 [title]:
-                {   
+                {
                     ...deck,
                     questions: [
                         ...deck.questions,
@@ -37,4 +37,15 @@ export function addCardToDeck(title, card) {
                 }
             }))
         })
+}
+
+//This is for testin purposes and not relevant to project delivery
+export function manageData() {
+    //to clear all the data, use the following command
+    // AsyncStorage.clear()
+    //to view the existing data, use the following lines of code
+    AsyncStorage.getItem(DECKS_STORAGE_KEY).then((result) => {
+        const data = JSON.parse(result)
+        console.log(data)
+    })
 }
