@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { white, fadeGreen, pink, orange } from '../utils/colors'
+import { removeDeck } from '../actions'
+import { deleteDeck } from '../utils/api'
 
-function createDeckView({name, entry, navigation}) {
+function CreateDeckView({ name, entry, navigation, onPress }) {
     return (
         <ScrollView style={styles.container} contentContainerStyle={styles.center}>
             <Text
@@ -25,6 +27,9 @@ function createDeckView({name, entry, navigation}) {
             <TouchableOpacity style={[styles.quizBtn, styles.btn]}>
                 <Text style={{ fontSize: 20 }}>Start Quiz</Text>
             </TouchableOpacity>
+            <TouchableOpacity onPress={onPress}>
+                <Text style={{ textDecorationLine: 'underline', marginTop: 30, fontSize: 16 }}>Delete Trivia</Text>
+            </TouchableOpacity>
         </ScrollView>
     )
 }
@@ -35,9 +40,21 @@ class Deck extends Component {
             title: this.props.name,
         })
     }
+    remove = (name) => {
+        //update store
+        this.props.dispatch(removeDeck(name))
+        //update db
+        deleteDeck(name)
+        //navigate back
+        this.props.navigation.navigate('Decks')
+    }
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        return nextProps.entry !== undefined && nextProps.entry.question !== undefined
+    }
     render() {
+        const { name } = this.props
         return (
-            createDeckView({...this.props})
+            <CreateDeckView {...this.props} onPress={() => this.remove(name)} />
         )
     }
 }
@@ -46,14 +63,14 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: white,
-        paddingVertical: 100,
+        paddingVertical: 80,
     },
     center: {
         alignItems: 'center',
     },
     addCardBtn: {
         backgroundColor: pink,
-        marginTop: 100,
+        marginTop: 80,
         marginBottom: 20,
     },
     quizBtn: {
@@ -70,14 +87,12 @@ const styles = StyleSheet.create({
     }
 })
 
-function mapStateToProps(entries, { route, navigation }) {
+function mapStateToProps(entries, { route }) {
     const { name } = route.params
     return {
         name,
-        navigation,
         entry: entries[name]
     }
-
 }
 
 export default connect(mapStateToProps)(Deck)

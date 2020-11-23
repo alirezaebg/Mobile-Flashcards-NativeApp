@@ -39,6 +39,15 @@ export function addCardToDeck(title, card) {
         })
 }
 
+export function deleteDeck(title) {
+    return AsyncStorage.getItem(DECKS_STORAGE_KEY).then((decks) => {
+        const data = JSON.parse(decks)
+        data[title] = undefined
+        delete data[title]
+        AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(data))
+    })
+}
+
 //This is for testin purposes and not relevant to project delivery
 export function manageData() {
     //to clear all the data, use the following command

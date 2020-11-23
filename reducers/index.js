@@ -1,4 +1,4 @@
-import { RECEIVE_ENTRIES, ADD_DECK, ADD_CARD } from '../actions'
+import { RECEIVE_ENTRIES, ADD_DECK, ADD_CARD, REMOVE_DECK } from '../actions'
 
 function entries(state = {}, action) {
     switch (action.type) {
@@ -22,8 +22,11 @@ function entries(state = {}, action) {
                     ...state[action.title],
                     questions: [...state[action.title].questions, action.card]
                 }
-
             }
+        case REMOVE_DECK:
+            const changedState = Object.assign({}, state)
+            delete changedState[action.title]
+            return changedState
         default:
             return state
     }
