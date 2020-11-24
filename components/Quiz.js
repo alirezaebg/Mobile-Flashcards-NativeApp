@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { darkGreen, purple, red, white } from '../utils/colors'
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
 
 class Quiz extends Component {
     state = {
@@ -34,6 +35,9 @@ class Quiz extends Component {
             pageNum: pageNum + 1,
         }))
     }
+    handleNotification = () => {
+        clearLocalNotification().then(setLocalNotification)
+    }
     render() {
         const { pageNum, ans, score } = this.state
         const { entry } = this.props
@@ -45,6 +49,7 @@ class Quiz extends Component {
             )
         }
         if (entry.questions.length != 0 && pageNum === entry.questions.length) {
+            this.handleNotification()
             return (
                 <View style={styles.container}>
                     <Text style={styles.text}>{`You scored ${(score * 100 / pageNum).toFixed(1)}% (${score} out of ${pageNum})`}</Text>

@@ -10,6 +10,7 @@ import NewDeck from './components/NewDeck'
 import Quiz from './components/Quiz'
 import Constants from 'expo-constants'
 import { purple, white, lightPurp, orange, black } from './utils/colors'
+import { setLocalNotification } from './utils/helpers'
 
 import { NavigationContainer } from "@react-navigation/native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
@@ -82,13 +83,13 @@ const StackNavigatorConfig = {
 //options for the header
 const opt = {
   headerTintColor: white,
-      headerTitleStyle: {
-        fontSize: 24
-      },
-      headerStyle: {
-        backgroundColor: orange,
-        height: 60,
-      },
+  headerTitleStyle: {
+    fontSize: 24
+  },
+  headerStyle: {
+    backgroundColor: orange,
+    height: 60,
+  },
 }
 
 const StackConfig = {
@@ -142,6 +143,9 @@ const MainNav = () => (
 )
 
 export default class App extends Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
   render() {
     const store = createStore(reducer)
     return (

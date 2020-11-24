@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import { receiveEntries } from '../actions'
 import { connect } from 'react-redux'
-import { getDecks, manageData } from '../utils/api'
+import { getDecks, manageData } from '../utils/helpers'
 import { yellow, orange } from '../utils/colors'
 import { AppLoading } from 'expo'
 

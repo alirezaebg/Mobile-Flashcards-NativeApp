@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-nati
 import { connect } from 'react-redux'
 import { white, fadeGreen, pink, orange } from '../utils/colors'
 import { removeDeck } from '../actions'
-import { deleteDeck } from '../utils/api'
+import { deleteDeck } from '../utils/helpers'
 
 function CreateDeckView({ name, entry, navigation, onPress }) {
     return (

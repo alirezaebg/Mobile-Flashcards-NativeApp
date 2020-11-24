@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TextInput, TouchableWithoutFeedback, TouchableOpacity, Keyboard } from 'react-native'
 import { connect } from 'react-redux'
-import { getDeck, saveDeckTitle } from '../utils/api'
+import { getDeck, saveDeckTitle } from '../utils/helpers'
 import { addDeck } from '../actions'
 import { lightGreen } from '../utils/colors'
 import { CommonActions } from '@react-navigation/native';
