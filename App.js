@@ -14,6 +14,7 @@ import { setLocalNotification } from './utils/helpers'
 
 import { NavigationContainer } from "@react-navigation/native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { createStackNavigator } from '@react-navigation/stack'
 
@@ -66,7 +67,7 @@ const TabNavigatorConfig = {
   }
 }
 
-const Tab = createBottomTabNavigator()
+const Tab= Platform.OS==='ios' ? createBottomTabNavigator() : createMaterialTopTabNavigator()
 
 const TabNav = () => (
   <Tab.Navigator {...TabNavigatorConfig}>
