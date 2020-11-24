@@ -7,8 +7,9 @@ import Decks from './components/Decks'
 import Deck from './components/Deck'
 import NewCard from './components/NewCard'
 import NewDeck from './components/NewDeck'
+import Quiz from './components/Quiz'
 import Constants from 'expo-constants'
-import { purple, white, lightPurp, orange } from './utils/colors'
+import { purple, white, lightPurp, orange, black } from './utils/colors'
 
 import { NavigationContainer } from "@react-navigation/native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
@@ -77,6 +78,19 @@ const TabNav = () => (
 const StackNavigatorConfig = {
   headerMode: "screen"
 }
+
+//options for the header
+const opt = {
+  headerTintColor: white,
+      headerTitleStyle: {
+        fontSize: 24
+      },
+      headerStyle: {
+        backgroundColor: orange,
+        height: 60,
+      },
+}
+
 const StackConfig = {
   TabNav: {
     name: "Home",
@@ -101,6 +115,20 @@ const StackConfig = {
   NewCard: {
     name: "New Card",
     component: NewCard,
+    options: {
+      ...opt,
+      title: 'New Card',
+      headerBackTitle: 'Back'
+    }
+  },
+  Quiz: {
+    name: "Quiz Time",
+    component: Quiz,
+    options: {
+      ...opt,
+      title: 'Quiz',
+      headerBackTitle: 'Back'
+    }
   }
 }
 const Stack = createStackNavigator();
@@ -109,6 +137,7 @@ const MainNav = () => (
     <Stack.Screen {...StackConfig['TabNav']} />
     <Stack.Screen {...StackConfig['Deck']} />
     <Stack.Screen {...StackConfig['NewCard']} />
+    <Stack.Screen {...StackConfig['Quiz']} />
   </Stack.Navigator>
 )
 

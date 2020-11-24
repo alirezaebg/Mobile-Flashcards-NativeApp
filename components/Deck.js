@@ -24,7 +24,10 @@ function CreateDeckView({ name, entry, navigation, onPress }) {
             >
                 <Text style={{ fontSize: 20 }}>Add Card</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.quizBtn, styles.btn]}>
+            <TouchableOpacity
+                style={[styles.quizBtn, styles.btn]}
+                onPress={() => navigation.navigate('Quiz Time', { title: name })}
+            >
                 <Text style={{ fontSize: 20 }}>Start Quiz</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={onPress}>
@@ -49,7 +52,7 @@ class Deck extends Component {
         this.props.navigation.navigate('Decks')
     }
     shouldComponentUpdate(nextProps, nextState, nextContext) {
-        return nextProps.entry !== undefined && nextProps.entry.question !== undefined
+        return nextProps.entry !== undefined
     }
     render() {
         const { name } = this.props
