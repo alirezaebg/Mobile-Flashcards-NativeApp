@@ -102,7 +102,6 @@ const styles = StyleSheet.create({
 })
 
 function mapStateToProps(entries) {
-    console.log(entries)
     return {
         entries
     }

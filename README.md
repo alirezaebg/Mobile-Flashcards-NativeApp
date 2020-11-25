@@ -30,3 +30,6 @@ Type in the following command in your terminal:
 
 ## State management
 This project utilizes the power of Redux for managing states and the react-redux binding.
+
+## Platforms 
+The applicatoin supports iOS and Android platforms, both of which have been tested using Expo Client.
