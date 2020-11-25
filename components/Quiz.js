@@ -88,7 +88,7 @@ class Quiz extends Component {
                     </Fragment>
                     : <Fragment>
                         <Text style={styles.text}>{entry.questions[pageNum].answer}</Text>
-                        <Text style={{ fontSize: 24, color: purple }}>Did you answer correctly?</Text>
+                        <Text style={{ fontSize: 20, color: purple, marginTop: 20 }}>Did you answer correctly?</Text>
                         <TouchableOpacity
                             style={[styles.yes, styles.btn]}
                             onPress={this.handleYes}
