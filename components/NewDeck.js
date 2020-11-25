@@ -6,6 +6,7 @@ import { addDeck } from '../actions'
 import { lightGreen } from '../utils/colors'
 import { CommonActions } from '@react-navigation/native';
 
+//component for creating a new deck
 class NewDeck extends Component {
     state = {
         value: '',

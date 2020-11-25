@@ -6,6 +6,7 @@ import { getDecks, manageData } from '../utils/helpers'
 import { yellow, orange } from '../utils/colors'
 import { AppLoading } from 'expo'
 
+//custom component that is used to show each deck
 function CustomButton({ elem, onPress, bounceValue, length, title }) {
     return (
         <TouchableOpacity

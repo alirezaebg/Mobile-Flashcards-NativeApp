@@ -5,6 +5,7 @@ import { white, fadeGreen, pink, orange } from '../utils/colors'
 import { removeDeck } from '../actions'
 import { deleteDeck } from '../utils/helpers'
 
+//creates a view for each deck
 function CreateDeckView({ name, entry, navigation, onPress }) {
     return (
         <ScrollView style={styles.container} contentContainerStyle={styles.center}>
@@ -51,6 +52,7 @@ class Deck extends Component {
         //navigate back
         this.props.navigation.navigate('Decks')
     }
+    //this makes sure that after deleting the deck and automatic rerender of the page, the app does not break!
     shouldComponentUpdate(nextProps, nextState, nextContext) {
         return nextProps.entry !== undefined
     }

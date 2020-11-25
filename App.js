@@ -18,8 +18,7 @@ import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { createStackNavigator } from '@react-navigation/stack'
 
-
-
+//status bar component
 function UdaciStatusBar({ backgroundColor, ...props }) {
   return (
     <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
@@ -28,6 +27,7 @@ function UdaciStatusBar({ backgroundColor, ...props }) {
   )
 }
 
+//settings for tab view
 const RouteConfigs = {
   Decks: {
     name: "Decks",
@@ -67,6 +67,7 @@ const TabNavigatorConfig = {
   }
 }
 
+//creating a tab view
 const Tab= Platform.OS==='ios' ? createBottomTabNavigator() : createMaterialTopTabNavigator()
 
 const TabNav = () => (
@@ -133,6 +134,8 @@ const StackConfig = {
     }
   }
 }
+
+//creating a stack navigation
 const Stack = createStackNavigator();
 const MainNav = () => (
   <Stack.Navigator {...StackNavigatorConfig}>

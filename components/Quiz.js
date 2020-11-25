@@ -4,11 +4,12 @@ import { connect } from 'react-redux'
 import { darkGreen, purple, red, white } from '../utils/colors'
 import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
 
+//component for taking the quiz
 class Quiz extends Component {
     state = {
-        pageNum: 0,
-        ans: false,
-        score: 0
+        pageNum: 0,   //page number
+        ans: false,   //answer mode
+        score: 0      //quiz score
     }
     componentDidMount() {
         this.props.navigation.setOptions({

@@ -5,6 +5,7 @@ import { addCardToDeck } from '../utils/helpers'
 import { addCard } from '../actions'
 import { lightGreen } from '../utils/colors'
 
+//component for adding a new card
 class NewCard extends Component {
     state = {
         question: '',
