@@ -70,7 +70,7 @@ class NewDeck extends Component {
                             onPress={this.handlePress}
                         >
                             <Text style={styles.submitText}>
-                                SUBMIT
+                                Create Deck
                             </Text>
                         </TouchableOpacity>
                     </View>

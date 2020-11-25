@@ -35,6 +35,13 @@ class Quiz extends Component {
             pageNum: pageNum + 1,
         }))
     }
+    handleStart = () => {
+        this.setState(() => ({
+            pageNum: 0,
+            ans: false,
+            score: 0
+        }))
+    }
     handleNotification = () => {
         clearLocalNotification().then(setLocalNotification)
     }
@@ -52,12 +59,26 @@ class Quiz extends Component {
             this.handleNotification()
             return (
                 <View style={styles.container}>
+                    <Text style={styles.titleText}>Quiz Result</Text>
                     <Text style={styles.text}>{`You scored ${(score * 100 / pageNum).toFixed(1)}% (${score} out of ${pageNum})`}</Text>
+                    <TouchableOpacity
+                        style={[styles.btn, {backgroundColor: darkGreen, marginTop: 40, marginBottom: 20}]}
+                        onPress={this.handleStart}
+                    >
+                        <Text style={{ fontSize: 20, color: white }}>Start Over!</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={[styles.btn, {backgroundColor: red, marginVertical: 20}]}
+                        onPress={() => this.props.navigation.navigate('Deck')}
+                    >
+                        <Text style={{ fontSize: 20, color: white }}>Return to Deck</Text>
+                    </TouchableOpacity>
                 </View>
             )
         }
         return (
             <View style={styles.container}>
+                <Text style={styles.titleText}>Question {(pageNum + 1)} of {entry.questions.length}</Text>
                 {(ans === false)
                     ? <Fragment>
                         <Text style={styles.text}>{entry.questions[pageNum].question}</Text>
@@ -90,9 +111,13 @@ class Quiz extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 20,
-        paddingTop: 100,
+        paddingHorizontal: 20,
+        paddingVertical: 30,
         alignItems: "center",
+    },
+    titleText: {
+        fontSize: 20,
+        marginBottom: 80
     },
     text: {
         fontSize: 24,
